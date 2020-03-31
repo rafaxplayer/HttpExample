@@ -18,7 +18,6 @@ class UsersAdapter(private val parentActivity: ItemListActivity,
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list_content, parent, false)
@@ -47,11 +46,11 @@ class UsersAdapter(private val parentActivity: ItemListActivity,
         }
 
         override fun onClick(v: View?) {
-            println(v)
+            var item = values[layoutPosition]
             if (twoPane) {
                 val fragment = ItemDetailFragment().apply {
                     arguments = Bundle().apply {
-                        //putParcelable(ItemDetailFragment.ARG_ITEM_USER, item)
+                        putParcelable(ItemDetailFragment.ARG_ITEM_USER, item)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -60,10 +59,10 @@ class UsersAdapter(private val parentActivity: ItemListActivity,
                     .commit()
             } else {
                 val intent = Intent(v?.context, ItemDetailActivity::class.java).apply {
-                    //putExtra(ItemDetailFragment.ARG_ITEM_USER, item)
+                    putExtra(ItemDetailFragment.ARG_ITEM_USER, item)
                 }
 
-                    //v?.context?.startActivity(intent)
+                    v?.context?.startActivity(intent)
 
             }
         }

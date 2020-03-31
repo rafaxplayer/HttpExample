@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.jrs.httpexample.models.User
+import kotlinx.android.synthetic.main.item_detail.view.*
 
 /**
  * A fragment representing a single Item detail screen.
@@ -26,11 +27,7 @@ class ItemDetailFragment : Fragment() {
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_USER)) {
-                // Load the dummy content specified by the fragment
-                // arguments. In a real-world scenario, use a Loader
-                // to load content from a content provider.
-                //user= it.getParcelable(ARG_ITEM_USER)
-                //activity?.toolbar_layout?.title = user?.name
+                user = it.getParcelable(ARG_ITEM_USER)
             }
         }
     }
@@ -41,11 +38,17 @@ class ItemDetailFragment : Fragment() {
 
         // Show the dummy content as text in a TextView.
         user?.let {
-            //rootView.item_detail.text = it.name
+            rootView.txtName.text = it.name.first
+            rootView.txtLast.text= it.name.last
+            rootView.txtEmail.text= it.email
+            rootView.txtAge.text= "Edad : ${it.dob.age}"
+
         }
 
         return rootView
     }
+
+
 
     companion object {
         /**
